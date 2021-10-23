@@ -1,0 +1,151 @@
+/* Import the font that we want: Fira Sans*/
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap");
+* {
+  /* reset */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Fira sans", "sans-serif";
+}
+
+/* Create gradient for the background */
+body {
+  background-color: #ff3cac;
+  background-image: linear-gradient(
+    315deg,
+    #ff3cac 0%,
+    #784ba0 50%,
+    #2b86c5 100%
+  );
+}
+
+/* styling for all the pages */
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Further styling for the Home dashboard page */
+.home {
+  width: 100%;
+  max-width: 400px;
+  padding: 50px 30px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+/* Styling for form */
+form {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  padding: 50px 30px;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(97, 186, 255, 1) 0%,
+    rgba(166, 239, 253, 1) 90.1%
+  );
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+}
+
+/* heading1 style in form */
+form h1 {
+  color: #fff;
+  font-size: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* heading2 style in form*/
+form h2 {
+  color: #fff;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+/* Error message style */
+.err-msg {
+  padding: 5px 0px;
+  color: red;
+}
+
+/* spacing between elements in form */
+form .form-group {
+  margin-bottom: 15px;
+}
+
+/* styling for each element input */
+form label {
+  display: block;
+  color: #eee;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+form input {
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+}
+
+/* If input does not submit use these styles ex. Email, name, password, etc  */
+form input:not([type="submit"]) {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+  transition: 0.4s;
+  color: #222;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+form input:not([type="submit"])::placeholder {
+  color: #fff;
+}
+
+/* styling for if something is and isn't in input fields */
+form input:not([type="submit"]):focus,
+form input:not([type="submit"]):valid {
+  background-color: white;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for input "buttons" like register and login and logout */
+form input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #48afff;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+  transition: 0.4s;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* link styling */
+.link {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #48afff;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+  transition: 0.4s;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 15px;
+  text-align: center;
+  text-decoration: none;
+}
