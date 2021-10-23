@@ -7,19 +7,23 @@ var bcrypt = require('bcrypt');
 /* GET home page. */
 router.post('/', async (req, res,) => {
   
-  const hashedPassword = await bcrypt.hash(req.body.password, 10)
   var first_name = req.body.name;
   var email = req.body.email;
-  var password = hashedPassword;
+  var password = req.body.password;
+
 
   
   if (password.length < 8){
       // var error = "Password not long enough";
       // res.render('error', {error:error});
       console.log('password not long enough')
-      res.redirect('./register')
+      var error = "Password not long enough";
+      res.render('error', {error:error});
+      //res.redirect('./register')
   }
   else{
+      const hashedPassword = await bcrypt.hash(req.body.password, 10)
+      password = hashedPassword;
       console.log("name: " + first_name + " Email: " + email + " Password: " + password);
 
       'use strict';
