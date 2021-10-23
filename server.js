@@ -11,5 +11,14 @@ app.get('/', (req, res) => {
   res.render('index.ejs', {name: 'Rahul'})
 })
 
+//GET routes for login and register
+app.get('/login', (req, res) => {
+  res.render('login.ejs')
+})
+
+app.get('/register', (req, res) => {
+  res.render('register.ejs')
+})
+
 //app running on port 3000
 app.listen(3000)
