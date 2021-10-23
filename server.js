@@ -19,6 +19,10 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
   res.render('register.ejs')
 })
+//post route for register form 
+app.post('/register', (req, res) => {
+  
+})
 
 //app running on port 3000
 app.listen(3000)
