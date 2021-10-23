@@ -15,7 +15,7 @@
       <%# Override post method to use delete instead %>
       <%# logout route deletes the user instead of using post%>
       <form action="/logout?_method=DELETE" method="POST">
-        <h1>Hi <%= name %></h1>
+        <h1>Hi {{ name }} </h1>
       <input type="submit" value="logout">
       </form>
     </div>
