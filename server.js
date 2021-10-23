@@ -1,5 +1,5 @@
 if(process.env.NODE_ENV !== 'production'){
-  //in dev
+  //in dev use environment variables
   require('dotenv').config()
 }
 
@@ -9,12 +9,14 @@ const express = require('express')
 const app = express();
 //using bcrypt to hash our password
 const bcrypt = require('bcrypt')
+//using passport 
 const passport = require('passport')
 
 //flash messages for errors
 const flash = require('express-flash')
 const session = require('express-session')
 
+//need override for post to use delete
 const methodOverride = require('method-override')
 
 //require passport.js function from config file
@@ -25,13 +27,13 @@ initPassport(
   id => users.find(user => user.id === id)
 )
 
-//NO DATABASE: using local storage in file
+//NO DATABASE: using local storage in file, switch to JSON file if needed
 const users = []
 
 //tell our server we are using ejs
 app.set('view-engine', 'ejs')
 
-//express dir name
+//express dir name to connect other public files and css files
 app.use(express.static(__dirname + '/public'))
 
 //telling our application to access our forms inside of our post method
@@ -44,6 +46,7 @@ app.use(session({
   saveUninitialized: false
 }))
 
+//init passport
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
@@ -65,9 +68,11 @@ app.post('/login', checkNotAuthUsers, passport.authenticate('local', {
   failureFlash: true
 }))
 
+//get route for register
 app.get('/register', checkNotAuthUsers, (req, res) => {
   res.render('register.ejs')
 })
+
 //post route for register form 
 app.post('/register', checkNotAuthUsers, async (req, res) => {
   try {
@@ -82,7 +87,7 @@ app.post('/register', checkNotAuthUsers, async (req, res) => {
   } catch {
     res.redirect('/register')
   }
-  console.log(users)
+  console.log(users) //users array 
 })
 
 //logging out

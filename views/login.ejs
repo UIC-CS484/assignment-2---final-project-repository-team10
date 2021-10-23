@@ -1,6 +1,8 @@
+<%# Login Page - First View  %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <%# Basic Meta Tags  %>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +11,13 @@
 </head>
 <body>
   <div class="app">
+        <%# Call post method for form to connect to login route  %>
         <form action="/login" method="POST">
           <div>
             <h1>PhotoShare App</h1>
             <h2>Login</h1>
           </div>
+          <%# error messages will appear in div if incorrect username or password %>
           <div class="err-msg">
             <% if(messages.error) { %>
               <%= messages.error %>
@@ -31,6 +35,7 @@
             <input type="submit" value="login">
           </div>
           <div>
+            <%# redirect if needed %>
             <a class="link" href="/register">Register</a>
           </div>
           </form>
