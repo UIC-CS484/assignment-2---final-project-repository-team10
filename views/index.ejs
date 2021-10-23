@@ -8,5 +8,9 @@
 </head>
 <body>
   <h1>Hi <%= name %></h1>
+  <%# Override post method to use delete instead %>
+  <form action="/logout?_method=DELETE" method="POST">
+  <button type="submit">Log out</button>
+  </form>
 </body>
 </html>
