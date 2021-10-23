@@ -11,7 +11,7 @@
 </head>
 <body>
     {{! Call post method for form to connect to login route }}  
-    <form action="/login" method="POST">
+    <form action="/loginSubmit" method="POST">
       <div>
         {{#if messages.error}}
 		    <p class="err-msg">{{messages.error}}</p>
@@ -29,7 +29,7 @@
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
       </div>
       <div>
-        <input type="submit" value="login">
+        <input type="submit" value="Login">
       </div>
       <div>
         <a class="link" href="/register">Register</a>
