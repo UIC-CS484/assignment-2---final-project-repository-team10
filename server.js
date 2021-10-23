@@ -30,6 +30,10 @@ const users = []
 
 //tell our server we are using ejs
 app.set('view-engine', 'ejs')
+
+//express dir name
+app.use(express.static(__dirname + '/public'))
+
 //telling our application to access our forms inside of our post method
 app.use(express.urlencoded({extended: false}))
 
