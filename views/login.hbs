@@ -7,11 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="main.css">
+   <script src="https://www.google.com/recaptcha/api.js?render=6LcdbO0cAAAAAJ51Hfytt5U7nC-yvqcHuK9W06hg"></script>
   <title>Login</title>
 </head>
 <body>
     {{! Call post method for form to connect to login route }}  
-    <form action="/loginSubmit" method="POST">
+    <form action="/loginSubmit" method="POST" id="verifyForm">
       <div>
         {{#if messages.error}}
 		    <p class="err-msg">{{messages.error}}</p>
@@ -28,7 +29,7 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
       </div>
-      <div>
+      <div class="form-group">
         <input type="submit" value="Login">
       </div>
       <div class="changeForm">
@@ -38,5 +39,46 @@
         <a class="link" href="/register">Register</a>
       </div>
     </form>
+
+{{! Javascript for captcha}}
+<script>
+  document.getElementById("verifyForm").addEventListener('submit', runVerify);
+
+  function(runVerify)(e) {
+    e.preventDefault();
+    runCaptcha();
+  }
+
+  function runCaptcha(){
+
+    grecaptcha.execute('6LcdbO0cAAAAAJ51Hfytt5U7nC-yvqcHuK9W06hg', {action: 'submit'}).then(function(token) {
+              
+      const email = document.querySelector('#email');
+      const password = document.querySelector('#password');
+      const captcha = token;
+
+      sendData(email, password, captcha);
+    });
+  }
+
+
+  function sendData(email, password, captcha) {
+
+    const info = JSON.stringify({email:email, password:password, captcha:captcha})
+
+    fetch('/verify', {
+      method:'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json'
+      },
+      body: info
+    }).then((res)=> res.json()).then((data)=>{
+      alert('msg: ' + data.msg + ', score' + data.score)
+    })
+  }
+</script>
+
+
 </body>
 </html>

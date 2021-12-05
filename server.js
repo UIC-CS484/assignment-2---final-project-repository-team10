@@ -21,8 +21,12 @@ var indexRouter = require('./routes/index')
 
 let users = require('./users.json')
 
+//secret key for captcha
+const secretKey = '6LcdbO0cAAAAAKNyyB-Tl8qsOiZUPrstma6ftDYB'
+
 //require passport.js function from config file
-const initPassport = require('./passport-config')
+const initPassport = require('./passport-config');
+const router = require('./routes/register');
 initPassport(
   passport, 
   email => users.find(user => user.email === email),
@@ -68,6 +72,30 @@ app.delete('/logout', (req, res) => {
   res.redirect('/')
 })
 
+//captcha
+app.post('/verify', (req, res) => {
+  if(!req.body.captcha){
+    console.log("err");
+    return res.json({"success":false, "msg":"Capctha is not checked"});
+   
+  }
+  const verifyUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}';
+
+  request(verifyUrl, (err, response, body) => {
+    if(err){
+      console.log(err);
+    }
+    body = JSON.parse(body);
+
+    if(!body.success || body.score < 0.4){
+      return res.join({'msg': 'you might be a robot, sorry', 'score':body.score});
+    }
+
+    return res.join({'msg': 'You have been verified', 'score':body.score});
+
+  })
+})
+
 //make sure non-logged users cannot access data/are authenticated 
 function checkAuthUsers(req, res, next){
   if(req.isAuthenticated()) {
@@ -83,6 +111,8 @@ function checkNotAuthUsers(req, res, next){
   }
   next()
 }
+
+router.use(checkAuthUsers);
 
 // error handler
 app.use(function(err, req, res, next) {
